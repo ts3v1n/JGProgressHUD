@@ -78,6 +78,10 @@ static CGRect keyboardFrame = (CGRect){{0.0f, 0.0f}, {0.0f, 0.0f}};
     keyboardFrame = [notification.userInfo[UIKeyboardFrameEndUserInfoKey] CGRectValue];
 }
 
++ (void)keyboardDidHide {
+    keyboardFrame = (CGRect){{0.0f, 0.0f}, {0.0f, 0.0f}};
+}
+
 + (CGRect)currentKeyboardFrame {
     return keyboardFrame;
 }
@@ -88,6 +92,8 @@ static CGRect keyboardFrame = (CGRect){{0.0f, 0.0f}, {0.0f, 0.0f}};
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardFrameWillChange:) name:UIKeyboardWillChangeFrameNotification object:nil];
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardFrameDidChange:) name:UIKeyboardDidChangeFrameNotification object:nil];
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardDidHide) name:UIKeyboardDidChangeFrameNotification object:nil];
 }
 
 #pragma mark - Initializers
